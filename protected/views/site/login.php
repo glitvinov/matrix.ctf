@@ -64,6 +64,46 @@ $this->pageTitle=Yii::app()->name." - Login";
         </div>
     </div>
 
+    <div class="form-group">
+        <?php echo $form->labelEx($model,'sex',array('class' => 'col-sm-2', 'style'=>'font-weight: bold;')); ?>
+        <div class="col-sm-5">
+            <?php echo $form->textField($model,'sex',array('style'=>'width: 100%;')); ?>
+        </div>
+        <div class="col-sm-3">
+            <?php echo $form->error($model,'sex',array('style'=>'font-weight: bold;')); ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->labelEx($model,'city',array('class' => 'col-sm-2', 'style'=>'font-weight: bold;')); ?>
+        <div class="col-sm-5">
+            <?php echo $form->textField($model,'city',array('style'=>'width: 100%;')); ?>
+        </div>
+        <div class="col-sm-3">
+            <?php echo $form->error($model,'city',array('style'=>'font-weight: bold;')); ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->labelEx($model,'site',array('class' => 'col-sm-2', 'style'=>'font-weight: bold;')); ?>
+        <div class="col-sm-5">
+            <?php echo $form->textField($model,'site',array('style'=>'width: 100%;')); ?>
+        </div>
+        <div class="col-sm-3">
+            <?php echo $form->error($model,'site',array('style'=>'font-weight: bold;')); ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <?php echo $form->labelEx($model,'info',array('class' => 'col-sm-2', 'style'=>'font-weight: bold;')); ?>
+        <div class="col-sm-5">
+            <?php echo $form->textField($model,'info',array('style'=>'width: 100%;')); ?>
+        </div>
+        <div class="col-sm-3">
+            <?php echo $form->error($model,'info',array('style'=>'font-weight: bold;')); ?>
+        </div>
+    </div>
+
     <div class="form-inline">
         <div class="col-sm-offset-2 col-sm-10">
             <div class="form-group">
