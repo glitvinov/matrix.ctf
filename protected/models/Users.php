@@ -64,7 +64,7 @@ class Users extends CActiveRecord
         return array(
             'id' => 'ID',
             'nick' => 'Nick',
-            'tel' => 'Tel',
+            'tel' => 'Telephone',
             'info' => 'Info',
             'sex' => 'Sex',
             'password' => 'Password',
