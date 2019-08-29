@@ -21,14 +21,14 @@ return array(
 
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		/*
+
 		'gii'=>array(
 			'class'=>'system.gii.GiiModule',
-			'password'=>'Enter Your Password Here',
+			'password'=>'123',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1'),
 		),
-		*/
+
 	),
 
 	// application components
@@ -42,20 +42,16 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 
-		// uncomment the following to enable URLs in path-format
-		/*
-		'urlManager'=>array(
-			'urlFormat'=>'path',
-			'rules'=>array(
-				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-			),
-		),
-		*/
-
-		// database settings are configured in database.php
-		'db'=>require(dirname(__FILE__).'/database.php'),
+		'db'=>array(
+            'connectionString' => 'mysql:host=localhost;dbname=matrix-ctf',
+            'emulatePrepare' => true,
+            'username' => 'admin',
+            'tablePrefix' => '',
+            'password' => 'qwe',
+            'charset' => 'utf8',
+            'enableProfiling' => (defined('YII_DEBUG') && YII_DEBUG),
+            'enableParamLogging' => (defined('YII_DEBUG') && YII_DEBUG),
+        ),
 
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors

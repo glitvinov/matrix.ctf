@@ -27,9 +27,11 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-		// renders the view file 'protected/views/site/index.php'
-		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+        if(isset($_POST['search'])){
+            $query = Yii::app()->db->createCommand('select * from users')->queryAll();
+            //var_dump($query);die;
+        }
+	    $this->render('index');
 	}
 
 	/**
@@ -77,7 +79,7 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
-		$model=new LoginForm;
+		$model=new Users;
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
@@ -92,7 +94,7 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+				$this->redirect('index');
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));

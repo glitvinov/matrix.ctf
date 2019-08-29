@@ -12,8 +12,13 @@ return array(
 	// application components
 	'components'=>array(
 
-		// database settings are configured in database.php
-		'db'=>require(dirname(__FILE__).'/database.php'),
+        'db'=>array(
+            'connectionString' => 'mysql:host=localhost;dbname=matrix.ctf',
+            'emulatePrepare' => true,
+            'username' => 'admin',
+            'password' => 'qwe',
+            'charset' => 'utf8',
+        ),
 
 		'log'=>array(
 			'class'=>'CLogRouter',
