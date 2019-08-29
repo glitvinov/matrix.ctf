@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb5
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Хост: localhost:3306
--- Время создания: Авг 29 2019 г., 03:17
--- Версия сервера: 5.7.27-0ubuntu0.18.04.1
--- Версия PHP: 5.6.40-10+ubuntu18.04.1+deb.sury.org+1
+-- Хост: 127.0.0.1:3306
+-- Время создания: Авг 29 2019 г., 14:14
+-- Версия сервера: 5.5.58
+-- Версия PHP: 5.6.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -55,7 +57,10 @@ INSERT INTO `users` (`id`, `nick`, `tel`, `info`, `sex`, `password`, `role`, `em
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id` (`id`);
+  ADD UNIQUE KEY `id` (`id`),
+  ADD UNIQUE KEY `nick` (`nick`),
+  ADD UNIQUE KEY `email` (`email`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
