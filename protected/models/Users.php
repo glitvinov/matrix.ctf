@@ -37,7 +37,7 @@ class Users extends CActiveRecord
             array('nick, tel, role, email, city, site', 'length', 'max'=>50),
             array('info, password', 'length', 'max'=>255),
             array('sex', 'length', 'max'=>1),
-            array('id, nick, email', 'unique', 'on' => 'register'),
+            array('id, nick, email', 'unique'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, nick, tel, info, sex, password, role, email, city, site', 'safe', 'on'=>'search'),

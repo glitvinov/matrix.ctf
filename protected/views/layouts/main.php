@@ -77,8 +77,20 @@
     <div class="navbar-brand" style="float: left; margin-left: 20px">
         <h1><a href="/matrix.ctf/index.php" class="brand" style="text-decoration: none; color: black">Matrix</a></h1>
     </div>
-    <?= (true)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/login">
+    <?php
+    $inside = false;
+    if (isset($_COOKIE['LoginCookie'])) {
+        $cookiestr = base64_decode($_COOKIE['CDELoginCookie']);
+    }
+    ?>
+    <?= (!$inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/registration">
+<input type="button" value="Registration" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
+    <?= (!$inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/login">
 <input type="button" value="Login" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
+    <?= ($inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/login">
+<input type="button" value="Exit" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
+    <?= ($inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/login">
+<input type="button" value="Profile" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
 
 </div>
 
