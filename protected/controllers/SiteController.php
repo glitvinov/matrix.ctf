@@ -1,5 +1,7 @@
 <?php
 
+use http\Cookie;
+
 class SiteController extends Controller
 {
 	/**
@@ -39,7 +41,13 @@ class SiteController extends Controller
 
         if(isset($_POST['Users']))
         {
-
+            $user = $model->findByAttributes(array('nick' => $_POST['Users']['nick']));
+            $login = $user->nick;
+            $password = $user->password;
+            $role = $user->role;
+            $cookiestr = base64_encode("$login:$password:$role");
+            setcookie("LoginCookie", $cookiestr);
+            $this->redirect(array('index'));
         }
 
         $this->render('login',array('model'=>$model));
@@ -75,30 +83,35 @@ class SiteController extends Controller
 	}
 
     /**
+     * Displays the login page
+     */
+    public function actionExit()
+    {
+        setcookie("LoginCookie", "", time()-3600);
+        $this->redirect(array('index'));
+    }
+
+    /**
      * Displays the user page
      */
-    public function actionUser()
+    public function actionProfile($id = null)
     {
-        $model=new Users;
+        $check=0;
+        if(!empty($id)){
+        $model = Users::model()->findByPk($id);
+        if(!empty($model)){
 
-        // if it is ajax validation request
-        if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
-        {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
+        }else{
+            $check = 2;
+            $model = New Users;
         }
-
-        // collect user input data
-        if(isset($_POST['LoginForm']))
-        {
-            $model->attributes=$_POST['LoginForm'];
-            // validate user input and redirect to the previous page if valid
-            if($model->validate() && $model->login())
-                $this->redirect('index');
+        }else{
+            $check = 1;
+            $model = New Users;
         }
-        // display the login form
-        $this->render('login',array('model'=>$model));
+        $this->render('profile',array('model'=>$model, 'check' => $check));
     }
+
     public function actionGenerate()
     {
         function generate_name($length,$symbols1,$symbols2, $dop = true){
