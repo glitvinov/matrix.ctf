@@ -26,7 +26,6 @@
             height: 100%;
             background: radial-gradient(circle, #fff 0%, #aaa 100%) no-repeat;
             overflow-x: hidden;
-            overflow-y: hidden;
         }
         body {
             text-align: center;
@@ -35,7 +34,6 @@
             width: 100%;
             height: 100%;
             overflow-x: hidden;
-            overflow-y: hidden;
         }
 
         canvas {display:block;}
@@ -73,6 +71,8 @@
 
 <body>
 
+<canvas id="c" style="position: absolute; top: 0px; left: 0px; z-index: 10;"></canvas>
+
 <div class="container" style="position: relative; z-index: 11; background: rgba(255, 255, 255, 0.7); margin-top: 20px">
     <div class="navbar-brand" style="float: left; margin-left: 20px">
         <h1><a href="/matrix.ctf/index.php" class="brand" style="text-decoration: none; color: black">Matrix</a></h1>
@@ -93,8 +93,6 @@
 <input type="button" value="Profile" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
 
 </div>
-
-<canvas id="c" style="position: absolute; top: 0px; left: 0px; z-index: 10;"></canvas>
 
 <div class="container" id="page" style="position: relative; z-index: 11;">
 
