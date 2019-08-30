@@ -13,7 +13,7 @@ $this->pageTitle=Yii::app()->name." - Login";
     </ul>
 </div>
 
-<div id="mainForm" style="padding: 100px; padding-top: 20px; display: none;">
+<div id="mainForm" style="padding: 100px; padding-top: 20px; display: none; padding-bottom: 50px">
     <div class="form" style="padding: 50px; border: 1px solid grey; border-radius: 10px">
 
     <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
