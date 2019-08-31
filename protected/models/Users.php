@@ -152,4 +152,14 @@ class Users extends CActiveRecord
         }
         return $value;
     }
+
+    public function getSex()
+    {
+        if($this->sex == "M")
+            return "Male";
+        elseif ($this->sex == "F")
+            return "Female";
+        else
+            return "Other Gender";
+    }
 }
