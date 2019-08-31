@@ -118,4 +118,48 @@ class Users extends CActiveRecord
     {
         return parent::model($className);
     }
+
+    public static function checkAuth()
+    {
+        $value = false;
+        if (isset($_COOKIE['LoginCookie'])) {
+            $cookiestr = base64_decode($_COOKIE['LoginCookie']);
+            $cookiestr = explode(':',$cookiestr);
+            $user = self::model()->findByAttributes(array('nick' => $cookiestr[0]));
+            if(in_array($cookiestr[2], ['manager','worker','neo'])) {
+                if ($user->password == $cookiestr[1]) {
+                    $value = true;
+                }else{
+                    setcookie("LoginCookie", "", time()-3600);
+                }
+            }
+        }
+        return $value;
+    }
+
+    public static function myId()
+    {
+        $value = null;
+        if (isset($_COOKIE['LoginCookie'])) {
+            $cookiestr = base64_decode($_COOKIE['LoginCookie']);
+            $cookiestr = explode(':',$cookiestr);
+            $user = self::model()->findByAttributes(array('nick' => $cookiestr[0]));
+            if(in_array($cookiestr[2], ['manager','worker','neo'])) {
+                if ($user->password == $cookiestr[1]) {
+                    $value = $user->id;
+                }
+            }
+        }
+        return $value;
+    }
+
+    public function getSex()
+    {
+        if($this->sex == "M")
+            return "Male";
+        elseif ($this->sex == "F")
+            return "Female";
+        else
+            return "Other Gender";
+    }
 }
