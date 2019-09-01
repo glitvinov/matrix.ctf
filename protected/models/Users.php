@@ -126,12 +126,18 @@ class Users extends CActiveRecord
             $cookiestr = base64_decode($_COOKIE['LoginCookie']);
             $cookiestr = explode(':',$cookiestr);
             $user = self::model()->findByAttributes(array('nick' => $cookiestr[0]));
-            if(in_array($cookiestr[2], ['manager','worker','neo'])) {
-                if ($user->password == $cookiestr[1]) {
-                    $value = true;
-                }else{
-                    setcookie("LoginCookie", "", time()-3600);
+            if(!empty($user)) {
+                if (in_array(strtolower($cookiestr[2]), ['manager', 'worker', 'neo'])) {
+                    if ($user->password == $cookiestr[1]) {
+                        $value = true;
+                    } else {
+                        setcookie("LoginCookie", "", time() - 3600);
+                    }
+                }else {
+                    setcookie("LoginCookie", "", time() - 3600);
                 }
+            }else {
+                setcookie("LoginCookie", "", time() - 3600);
             }
         }
         return $value;
@@ -144,9 +150,11 @@ class Users extends CActiveRecord
             $cookiestr = base64_decode($_COOKIE['LoginCookie']);
             $cookiestr = explode(':',$cookiestr);
             $user = self::model()->findByAttributes(array('nick' => $cookiestr[0]));
-            if(in_array($cookiestr[2], ['manager','worker','neo'])) {
-                if ($user->password == $cookiestr[1]) {
-                    $value = $user->id;
+            if(!empty($user)) {
+                if (in_array(strtolower($cookiestr[2]), ['manager', 'worker', 'neo'])) {
+                    if ($user->password == $cookiestr[1]) {
+                        $value = $user->id;
+                    }
                 }
             }
         }

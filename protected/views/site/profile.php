@@ -14,11 +14,6 @@ $this->pageTitle=Yii::app()->name;
     <div class="form-horizontal" style="padding: 50px; border: 1px solid grey; border-radius: 10px">
 <?php
 echo '<div class="form-group">';
-echo '<div class="col-sm-4"><h3 style="margin: 0px; text-decoration: underline;">ID user:</h3></div>';
-echo '<div class="col-sm-6"><h3 style="margin: 0px;">'. $model->id .'</h3></div>';
-echo '</div>';
-
-echo '<div class="form-group">';
 echo '<div class="col-sm-4"><h3 style="margin: 0px; text-decoration: underline;">Nick:</h3></div>';
 echo '<div class="col-sm-6"><h3 style="margin: 0px;">'. $model->nick .'</h3></div>';
 echo '</div>';

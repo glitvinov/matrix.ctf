@@ -7367,6 +7367,7 @@ abstract class CModel extends CComponent implements IteratorAggregate, ArrayAcce
 	}
 	public function hasErrors($attribute=null)
 	{
+		//var_dump($this->_errors);die;
 		if($attribute===null)
 			return $this->_errors!==array();
 		else
