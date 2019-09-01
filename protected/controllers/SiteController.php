@@ -29,11 +29,15 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-        if(isset($_POST['search'])){
-            $query = Yii::app()->db->createCommand('select * from users')->queryAll();
-            //var_dump($query);die;
+	    //var_dump(Users::checkRole()); die;
+        $role = Users::checkRole();
+        $data = [];
+        if(isset($_POST['search']) and $role == "manager"){
+            $searchProfile = Yii::app()->db->createCommand("select * from users WHERE nick like '%".$_POST['search']."%'")->queryAll();
+            $data['searchProfile'] = $searchProfile;
+            //var_dump($searchProfile);die;
         }
-	    $this->render('index');
+	    $this->render('index', array('role' => $role, 'data' => $data));
 	}
 
     public function actionLogin(){
@@ -91,9 +95,6 @@ class SiteController extends Controller
         $this->redirect(array('index'));
     }
 
-    /**
-     * Displays the user page
-     */
     public function actionProfile($id = null)
     {
         $check=0;
@@ -112,41 +113,29 @@ class SiteController extends Controller
         $this->render('profile',array('model'=>$model, 'check' => $check));
     }
 
-    public function actionGenerate()
+    public function actionGen()
     {
-        function generate_name($length,$symbols1,$symbols2, $dop = true){
-            $code = '';
-            for( $i = 0; $i < (int)$length; $i++ )
-            {
-                if($i%2 == 0) {
-                    $num = rand(1, strlen($symbols1));
-                    $code .= substr($symbols1, $num - 1, 1);
-                }else{
-                    $num = rand(1, strlen($symbols2));
-                    $code .= substr($symbols2, $num - 1, 1);
-                }
-            }
-            if ($dop) {
-                for ($i = 0; $i < 3; $i++) {
-                    $num = rand(0, 9);
-                    $code .= $num;
-                }
-            }
-            return $code;
+        for($i=0 ;$i <= 100; $i++){
+            echo $this->generate();
+            echo "<hr />";
         }
+    }
+
+    public function generate()
+    {
         $allName = $this->getName();
         $name = $allName[rand(0, array_rand($allName))].rand(100,1000);
-        $pass = generate_name(11, 'AEIOUaeiouaeiouaeiouaeiouaeiouaeiou123456789012345678901234567890', 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz');
-        $tel = generate_name(11, '1234567890', '1234567890', false);
-        $info = generate_name(80, 'AEIOUaeiouaeiouaeiouaeiouaeiouaeiou       ', 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyzbcdfghjklmnpqrstvwxyzbcdfghjklmnpqrstvwxyzbcdfghjklmnpqrstvwxyz       ', false);
-        $sex = generate_name(1, 'MF', '', false);
+        $pass = $this->generate_name(11, 'AEIOUaeiouaeiouaeiouaeiouaeiouaeiou123456789012345678901234567890', 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz');
+        $tel = $this->generate_name(11, '1234567890', '1234567890', false);
+        $info = $this->generate_name(80, 'AEIOUaeiouaeiouaeiouaeiouaeiouaeiou       ', 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyzbcdfghjklmnpqrstvwxyzbcdfghjklmnpqrstvwxyzbcdfghjklmnpqrstvwxyz       ', false);
+        $sex = $this->generate_name(1, 'MF', '', false);
         $role = (rand(0, 1))?"manager":"worker";
         $subemail = array('@mail.ru', '@gmail.com', '@yandex.ru', '@ctf.omgtu');
         $email = $name.$subemail[rand(0, array_rand($subemail))];
         $subcity = array('Moscow', 'Saint Petersburg', 'Novosibirsk', 'Yekaterinburg', 'Omsk', 'Tyumen', 'Perm', 'Almetyevsk', 'Gorno-Altaysk', 'Krasnoyarsk', 'Tomsk');
         $city = $subcity[rand(0, array_rand($subcity))];
         $domen = array('.ru', '.com', '.bk', '.omgtu', '.ctf');
-        $site = substr($name, 0, -3).$domen[rand(0, array_rand($domen))];
+        $site = substr( strtolower($name), 0, -3).$domen[rand(0, array_rand($domen))];
         $model = New Users;
         $model->nick = $name;
         $model->password = $pass;
@@ -179,9 +168,27 @@ class SiteController extends Controller
         echo $city;
         echo '<br />';
         echo $site;*/
+    }
 
-
-
+    function generate_name($length,$symbols1,$symbols2, $dop = true){
+        $code = '';
+        for( $i = 0; $i < (int)$length; $i++ )
+        {
+            if($i%2 == 0) {
+                $num = rand(1, strlen($symbols1));
+                $code .= substr($symbols1, $num - 1, 1);
+            }else{
+                $num = rand(1, strlen($symbols2));
+                $code .= substr($symbols2, $num - 1, 1);
+            }
+        }
+        if ($dop) {
+            for ($i = 0; $i < 3; $i++) {
+                $num = rand(0, 9);
+                $code .= $num;
+            }
+        }
+        return $code;
     }
 
     public function getName(){

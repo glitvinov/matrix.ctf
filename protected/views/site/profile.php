@@ -34,6 +34,11 @@ echo '<div class="col-sm-6"><h3 style="margin: 0px;">'. $model->getSex() .'</h3>
 echo '</div>';
 
 echo '<div class="form-group">';
+echo '<div class="col-sm-4"><h3 style="margin: 0px; text-decoration: underline;">Role:</h3></div>';
+echo '<div class="col-sm-6"><h3 style="margin: 0px;">'. $model->role .'</h3></div>';
+echo '</div>';
+
+echo '<div class="form-group">';
 echo '<div class="col-sm-4"><h3 style="margin: 0px; text-decoration: underline;">Info:</h3></div>';
 echo '<div class="col-sm-6"><h3 style="margin: 0px;">'. $model->info .'</h3></div>';
 echo '</div>';

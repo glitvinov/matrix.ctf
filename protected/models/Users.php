@@ -151,11 +151,21 @@ class Users extends CActiveRecord
             $cookiestr = explode(':',$cookiestr);
             $user = self::model()->findByAttributes(array('nick' => $cookiestr[0]));
             if(!empty($user)) {
-                if (in_array(strtolower($cookiestr[2]), ['manager', 'worker', 'neo'])) {
-                    if ($user->password == $cookiestr[1]) {
-                        $value = $user->id;
-                    }
-                }
+                $value = $user->id;
+            }
+        }
+        return $value;
+    }
+
+    public static function myNick()
+    {
+        $value = null;
+        if (isset($_COOKIE['LoginCookie'])) {
+            $cookiestr = base64_decode($_COOKIE['LoginCookie']);
+            $cookiestr = explode(':',$cookiestr);
+            $user = self::model()->findByAttributes(array('nick' => $cookiestr[0]));
+            if(!empty($user)) {
+                $value = $user->nick;
             }
         }
         return $value;
@@ -169,5 +179,16 @@ class Users extends CActiveRecord
             return "Female";
         else
             return "Other Gender";
+    }
+
+    public static function checkRole()
+    {
+        $value = 'guest';
+        if (isset($_COOKIE['LoginCookie'])) {
+            $cookiestr = base64_decode($_COOKIE['LoginCookie']);
+            $cookiestr = explode(':',$cookiestr);
+            $value = strtolower($cookiestr[2]);
+        }
+        return $value;
     }
 }

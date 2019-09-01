@@ -1,4 +1,5 @@
-<?php /* @var $this Controller */ ?>
+<?php /* @var $this Controller */
+/* @var $content */?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -71,7 +72,7 @@
 
 <body>
 
-<canvas id="c" style="position: absolute; top: 0px; left: 0px; z-index: 10;"></canvas>
+<canvas id="c" style="position: fixed; top: 0px; left: 0px; z-index: 10;"></canvas>
 
 <div class="container" style="position: relative; z-index: 11; background: rgba(255, 255, 255, 0.7); margin-top: 20px">
     <div class="navbar-brand" style="float: left; margin-left: 20px">
@@ -80,6 +81,7 @@
     <?php
     $inside = Users::checkAuth();
     $id = Users::myId();
+    $nick = Users::myNick();
     ?>
     <?= (!$inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/registration">
 <input type="button" value="Registration" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
@@ -88,8 +90,9 @@
     <?= ($inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/exit">
 <input type="button" value="Exit" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
     <?= ($inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/profile'.((!empty($id))?'&id='.$id:'').'">
-<input type="button" value="Profile" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
-
+<input type="button" value="Profile ('.$nick.')" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
+    <?= '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/index">
+<input type="button" value="Main" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>' ?>
 </div>
 
 <div class="container" id="page" style="position: relative; z-index: 11;">
