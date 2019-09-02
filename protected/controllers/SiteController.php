@@ -32,10 +32,15 @@ class SiteController extends Controller
 	    //var_dump(Users::checkRole()); die;
         $role = Users::checkRole();
         $data = [];
+        //var_dump($_POST);die;
         if(isset($_POST['search']) and $role == "manager"){
-            $searchProfile = Yii::app()->db->createCommand("select * from users WHERE nick like '%".$_POST['search']."%'")->queryAll();
-            $data['searchProfile'] = $searchProfile;
-            //var_dump($searchProfile);die;
+            if($_POST['Button'] == "Find") {
+                $searchProfile = Yii::app()->db->createCommand("select * from users WHERE nick like '" . $_POST['search'] . "'")->queryAll();
+                $data['searchProfile'] = $searchProfile;
+            }elseif ($_POST['Button'] == "Random(20)"){
+                $searchProfile = Yii::app()->db->createCommand("select * from users WHERE role='worker' ORDER BY rand() LIMIT 20")->queryAll();
+                $data['searchProfile'] = $searchProfile;
+            }
         }
 	    $this->render('index', array('role' => $role, 'data' => $data));
 	}
@@ -124,7 +129,7 @@ class SiteController extends Controller
     public function generate()
     {
         $allName = $this->getName();
-        $name = $allName[rand(0, array_rand($allName))].rand(100,1000);
+        $name = $allName[mt_rand(0, array_rand($allName))].mt_rand(100,1000);
         $pass = $this->generate_name(11, 'AEIOUaeiouaeiouaeiouaeiouaeiouaeiou123456789012345678901234567890', 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyz');
         $tel = $this->generate_name(11, '1234567890', '1234567890', false);
         $info = $this->generate_name(80, 'AEIOUaeiouaeiouaeiouaeiouaeiouaeiou       ', 'BCDFGHJKLMNPQRSTVWXYZbcdfghjklmnpqrstvwxyzbcdfghjklmnpqrstvwxyzbcdfghjklmnpqrstvwxyzbcdfghjklmnpqrstvwxyz       ', false);

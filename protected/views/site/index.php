@@ -37,7 +37,8 @@ if(in_array($role, array('manager'))):
         <h3><p>You can find a user using his nickname</p></h3>
         <form action="index.php?r=site/index" method="post">
             <input name="search" type="text" class="form-control" style="margin-bottom: 0px; width: 70%;">
-            <input type="submit" class="btn" value="Find">
+            <input name="Button" type="submit" class="btn" value="Find">
+            <input name="Button" type="submit" class="btn" value="Random(20)">
         </form>
     </div>
 
