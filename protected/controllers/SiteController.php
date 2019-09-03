@@ -35,10 +35,10 @@ class SiteController extends Controller
         //var_dump($_POST);die;
         if(isset($_POST['search']) and $role == "manager"){
             if($_POST['Button'] == "Find") {
-                $searchProfile = Yii::app()->db->createCommand("select * from users WHERE nick like '" . $_POST['search'] . "'")->queryAll();
+                $searchProfile = Yii::app()->db->createCommand("SELECT * FROM users WHERE nick = '" . $_POST['search'] . "'")->queryAll();
                 $data['searchProfile'] = $searchProfile;
             }elseif ($_POST['Button'] == "Random(20)"){
-                $searchProfile = Yii::app()->db->createCommand("select * from users WHERE role='worker' ORDER BY rand() LIMIT 20")->queryAll();
+                $searchProfile = Yii::app()->db->createCommand("SELECT * FROM users WHERE role='worker' ORDER BY rand() LIMIT 20")->queryAll();
                 $data['searchProfile'] = $searchProfile;
             }
         }
