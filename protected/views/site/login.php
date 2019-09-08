@@ -13,6 +13,7 @@ $this->pageTitle=Yii::app()->name." - Login";
             'type'=>'horizontal',
         )); ?>
 
+        <h3 style="color: red"><?= ($error)?'Authorisation Error.':'' ?></h3>
         <div class="form-group">
             <?php echo $form->labelEx($model,'nick',array('class' => 'col-sm-4', 'style'=>'font-weight: bold;')); ?>
             <div class="col-sm-6">

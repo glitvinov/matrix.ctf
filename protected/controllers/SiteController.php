@@ -43,19 +43,28 @@ class SiteController extends Controller
 
     public function actionLogin(){
         $model=new Users;
+        $error = 0;
 
         if(isset($_POST['Users']))
         {
             $user = $model->findByAttributes(array('nick' => $_POST['Users']['nick']));
-            $login = $user->nick;
-            $password = $user->password;
-            $role = $user->role;
-            $cookiestr = base64_encode("$login:$password:$role");
-            setcookie("LoginCookie", $cookiestr);
-            $this->redirect(array('index'));
+            if($user) {
+                if($user->password == $_POST['Users']['password']) {
+                    $login = $user->nick;
+                    $password = $user->password;
+                    $role = $user->role;
+                    $cookiestr = base64_encode("$login:$password:$role");
+                    setcookie("LoginCookie", $cookiestr);
+                    $this->redirect(array('index'));
+                }else{
+                    $error = 2;
+                }
+            }else{
+                $error = 1;
+            }
         }
 
-        $this->render('login',array('model'=>$model));
+        $this->render('login',array('model'=>$model, 'error' => $error));
     }
 
 	/**
