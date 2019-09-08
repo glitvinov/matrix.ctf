@@ -1,6 +1,7 @@
 <?php
 /* @var $this SiteController */
 /* @var $model LoginForm */
+/* @var $error */
 
 $this->pageTitle=Yii::app()->name." - Login";
 ?>
