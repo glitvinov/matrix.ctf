@@ -12,7 +12,7 @@ if(in_array($role, array('Guest'))):
 
 <div style="padding: 100px;" >
     <h1>Welcome to "<?= CHtml::encode(Yii::app()->name)?>"</h1>
-    <h3><p>Что бы находиться в системе вам необходимо авторизоваться</p></h3>
+    <h3><p>You need to log in to be in the system</p></h3>
 </div>
 
 <?php
