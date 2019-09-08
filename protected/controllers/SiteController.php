@@ -1,5 +1,6 @@
 <?php
 
+use http\Client\Curl\User;
 use http\Cookie;
 
 class SiteController extends Controller
@@ -29,16 +30,11 @@ class SiteController extends Controller
 	 */
 	public function actionIndex()
 	{
-	    //var_dump(Users::checkRole()); die;
-        $role = Users::checkRole();
+        $role = Users::myRole();
         $data = [];
-        //var_dump($_POST);die;
-        if(isset($_POST['search']) and $role == "manager"){
+        if(isset($_POST['search'])){
             if($_POST['Button'] == "Find") {
-                $searchProfile = Yii::app()->db->createCommand("SELECT * FROM users WHERE nick = '" . $_POST['search'] . "'")->queryAll();
-                $data['searchProfile'] = $searchProfile;
-            }elseif ($_POST['Button'] == "Random(20)"){
-                $searchProfile = Yii::app()->db->createCommand("SELECT * FROM users WHERE role='worker' ORDER BY rand() LIMIT 20")->queryAll();
+                $searchProfile = Yii::app()->db->createCommand("SELECT * FROM users WHERE nick like '%" . $_POST['search'] . "%'")->queryAll();
                 $data['searchProfile'] = $searchProfile;
             }
         }
@@ -76,7 +72,6 @@ class SiteController extends Controller
 			Yii::app()->end();
 		}
 		// collect user input data
-        $validate = 'true';
 		if(isset($_POST['Users']))
 		{
 		 	$model->attributes=$_POST['Users'];
@@ -85,10 +80,10 @@ class SiteController extends Controller
             if($model->validate()) {
                 $model->save();
                 $this->redirect(array('index'));
-            }else{ $validate = 'false';}
+            }
 		}
 		// display the login form
-		$this->render('registration',array('model'=>$model, 'validate' => $validate));
+		$this->render('registration',array('model'=>$model));
 	}
 
     /**
@@ -105,15 +100,15 @@ class SiteController extends Controller
         $check=0;
         if(!empty($id)){
         $model = Users::model()->findByPk($id);
-        if(!empty($model)){
-
-        }else{
-            $check = 2;
+        if(empty($model)){
+            $check = 1;
             $model = New Users;
         }
         }else{
-            $check = 1;
-            $model = New Users;
+            $id = Users::myId();
+            $model = Users::model()->findByPk($id);
+            if(empty($model))
+                $this->redirect('index');
         }
         $this->render('profile',array('model'=>$model, 'check' => $check));
     }

@@ -33,7 +33,7 @@ class Users extends CActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('nick, tel, info, sex, password, role, email', 'required'),
+            array('nick, tel, info, sex, password, email', 'required'),
             array('nick, tel, role, email, city, site', 'length', 'max'=>50),
             array('info, password', 'length', 'max'=>255),
             array('sex', 'length', 'max'=>1),
@@ -114,6 +114,7 @@ class Users extends CActiveRecord
      * @param string $className active record class name.
      * @return Users the static model class
      */
+
     public static function model($className=__CLASS__)
     {
         return parent::model($className);
@@ -127,13 +128,9 @@ class Users extends CActiveRecord
             $cookiestr = explode(':',$cookiestr);
             $user = self::model()->findByAttributes(array('nick' => $cookiestr[0]));
             if(!empty($user)) {
-                if (in_array(strtolower($cookiestr[2]), ['manager', 'worker', 'neo'])) {
-                    if ($user->password == $cookiestr[1]) {
-                        $value = true;
-                    } else {
-                        setcookie("LoginCookie", "", time() - 3600);
-                    }
-                }else {
+                if ($user->password == $cookiestr[1]) {
+                    $value = true;
+                } else {
                     setcookie("LoginCookie", "", time() - 3600);
                 }
             }else {
@@ -181,13 +178,13 @@ class Users extends CActiveRecord
             return "Other Gender";
     }
 
-    public static function checkRole()
+    public static function myRole()
     {
-        $value = 'guest';
+        $value = 'Guest';
         if (isset($_COOKIE['LoginCookie'])) {
             $cookiestr = base64_decode($_COOKIE['LoginCookie']);
             $cookiestr = explode(':',$cookiestr);
-            $value = strtolower($cookiestr[2]);
+            if(isset($cookiestr[2])) $value = $cookiestr[2];
         }
         return $value;
     }

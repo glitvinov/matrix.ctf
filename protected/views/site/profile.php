@@ -1,13 +1,15 @@
 <?php
 /* @var $this SiteController */
+
+use http\Client\Curl\User;
+
 /* @var $check */
 /* @var $model Users */
 
 $this->pageTitle=Yii::app()->name;
 ?>
 
-<?php if ($check == 1) echo '<div style="padding: 100px;" > <h1>ID cannot be empty.</h1> </div>' ?>
-<?php if ($check == 2) echo '<div style="padding: 100px;" > <h1>This user does not exist.</h1> </div>' ?>
+<?php if ($check == 1) echo '<div style="padding: 100px;" > <h1>This user does not exist.</h1> </div>' ?>
 
 <?php if($check == 0): ?>
 <div style="padding: 100px;">
@@ -37,12 +39,12 @@ echo '<div class="form-group">';
 echo '<div class="col-sm-4"><h3 style="margin: 0px; text-decoration: underline;">Role:</h3></div>';
 echo '<div class="col-sm-6"><h3 style="margin: 0px;">'. $model->role .'</h3></div>';
 echo '</div>';
-
+if(Users::myId() == $model->id or Users::myRole() == "Manager") {
 echo '<div class="form-group">';
 echo '<div class="col-sm-4"><h3 style="margin: 0px; text-decoration: underline;">Info:</h3></div>';
-echo '<div class="col-sm-6"><h3 style="margin: 0px;">'. $model->info .'</h3></div>';
+echo '<div class="col-sm-6"><h3 style="margin: 0px;">' . $model->info . '</h3></div>';
 echo '</div>';
-
+}
 echo '<div class="form-group">';
 echo '<div class="col-sm-4"><h3 style="margin: 0px; text-decoration: underline;">City:</h3></div>';
 echo '<div class="col-sm-6"><h3 style="margin: 0px;">'. $model->city .'</h3></div>';

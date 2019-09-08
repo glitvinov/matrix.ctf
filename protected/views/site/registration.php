@@ -6,14 +6,7 @@ $this->pageTitle=Yii::app()->name." - Login";
 ?>
 
 
-<div style="padding: 100px; padding-bottom: 50px" >
-    <ul class="nav nav-tabs nav-justified">
-        <li role="presentation" class="roleChoice" title="Worker" style="border: ridge;"><a href="#" style="color: black"><h3>Worker</h3></a></li>
-        <li role="presentation" class="roleChoice" title="Manager" style="border: ridge;"><a href="#" style="color: black"><h3>Manager</h3></a></li>
-    </ul>
-</div>
-
-<div id="mainForm" style="padding: 100px; padding-top: 20px; display: none; padding-bottom: 50px">
+<div id="mainForm" style="padding: 100px; padding-top: 20px; padding-bottom: 50px">
     <div class="form" style="padding: 50px; border: 1px solid grey; border-radius: 10px">
 
     <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -107,10 +100,6 @@ $this->pageTitle=Yii::app()->name." - Login";
 
     <div class="form-inline">
         <div class="col-sm-offset-2 col-sm-10">
-            <div class="form-group">
-                <?php echo $form->textField($model,'role',array('style'=>'display: none;')); ?>
-                <?php echo $form->error($model,'role'); ?>
-            </div>
             <?php echo CHtml::submitButton('Registration', array('class' => 'btn btn-default')); ?>
         </div>
     </div>
@@ -119,18 +108,5 @@ $this->pageTitle=Yii::app()->name." - Login";
     </div>
 </div>
 
-<script>
-    $(document).on('click', '.roleChoice', function (e) {
-        var allElem = document.getElementsByClassName('roleChoice');
-        for (var i=0; i<allElem.length; i++) allElem[i].className = 'roleChoice';
-        $(this).addClass('active');
-        document.getElementById('mainForm').style.display = '';
-        document.getElementById('Users_role').value = $(this).prop('title');
-    });
-    $(document).ready(function() {
-        if(!<?= $validate; ?>)
-        document.getElementById('mainForm').style.display = '';
-    });
-</script>
 
 </div>

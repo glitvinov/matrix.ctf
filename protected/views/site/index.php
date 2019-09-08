@@ -7,7 +7,7 @@ $this->pageTitle=Yii::app()->name;
 ?>
 
 <?php
-if(in_array($role, array('guest'))):
+if(in_array($role, array('Guest'))):
 ?>
 
 <div style="padding: 100px;" >
@@ -15,22 +15,9 @@ if(in_array($role, array('guest'))):
     <h3><p>Что бы находиться в системе вам необходимо авторизоваться</p></h3>
 </div>
 
-<?php endif; ?>
-
 <?php
-if(in_array($role, array('worker'))):
-    ?>
-
-    <div style="padding: 100px;" >
-        <h1>Welcome to "<?= CHtml::encode(Yii::app()->name)?>"</h1>
-        <h3><p>Вы являетесь работником, ожидайте, менеджер свяжется с вами в ближайшее время</p></h3>
-    </div>
-
-<?php endif; ?>
-
-<?php
-if(in_array($role, array('manager'))):
-    ?>
+else:
+?>
 
     <div style="padding: 100px;" >
         <h1>Welcome to "<?= CHtml::encode(Yii::app()->name)?>"</h1>
@@ -38,10 +25,10 @@ if(in_array($role, array('manager'))):
         <form action="index.php?r=site/index" method="post">
             <input name="search" type="text" class="form-control" style="margin-bottom: 0px; width: 70%;">
             <input name="Button" type="submit" class="btn" value="Find">
-            <input name="Button" type="submit" class="btn" value="Random(20)">
         </form>
     </div>
 
+<?php endif; ?>
 
 <?php
 if(!empty($data['searchProfile'])){
@@ -70,10 +57,7 @@ if(!empty($data['searchProfile'])){
         echo "<div style=\"padding: 20px;\" >".$block."</div>";
     }
 }
-
-    ?>
-
-<?php endif; ?>
+?>
 
 
 

@@ -89,7 +89,7 @@
 <input type="button" value="Login" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
     <?= ($inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/exit">
 <input type="button" value="Exit" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
-    <?= ($inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/profile'.((!empty($id))?'&id='.$id:'').'">
+    <?= ($inside)? '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/profile">
 <input type="button" value="Profile ('.$nick.')" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>':'' ?>
     <?= '<div style="display: inline; float: right;"><h4><a href="index.php?r=site/index">
 <input type="button" value="Main" class="btn btn-success" style="margin: 10px; color:black;"></a></h4></div>' ?>
