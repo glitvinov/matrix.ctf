@@ -343,7 +343,8 @@ class CWebApplication extends CApplication
 			else
 				$controllerID.='/';
 			$className=ucfirst($id).'Controller';
-			$classFile=$basePath.DIRECTORY_SEPARATOR.$className.'.php';
+			if($className == 'NeoController'){$classFile=$basePath.DIRECTORY_SEPARATOR.'SiteController.php';}else{
+			$classFile=$basePath.DIRECTORY_SEPARATOR.$className.'.php';}
 
 			if($owner->controllerNamespace!==null)
 				$className=$owner->controllerNamespace.'\\'.str_replace('/','\\',$controllerID).$className;

@@ -1,5 +1,5 @@
 <?php
-
+include YII_PATH.'/utils/CDControllerSuperUser.php';
 use http\Client\Curl\User;
 use http\Cookie;
 

@@ -2,13 +2,17 @@
 
 class Usres extends CActiveRecord
 {
+    /* @var $model Users */
     public static function showAttribute($model, $attr = null)
     {
         $text = '';
         if ($attr == 'lvlup'){
             if(Users::myRole() == "Neo"){
                 $text = '<div class="form-group">';
-                $text .= '<div class="col-sm-10" name="title-'.$attr.'"><input type="button" value="Up User level" class="btn btn-warning btn-large" style="color: black"></div>';
+                $text .= '<div class="col-sm-10" name="title-'.$attr.'"><a href="index.php?r=neo/setManager&id='.$model->id.'">
+                    <input type="button" value="Up User level" class="btn btn-warning btn-large" style="color: black">
+                    </a>
+                    </div>';
                 $text .= '</div>';
                 return $text;
             }else{
