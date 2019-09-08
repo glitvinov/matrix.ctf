@@ -178,6 +178,23 @@ class Users extends CActiveRecord
             return "Other Gender";
     }
 
+    /* @var $model Users */
+    public static function showAttribute($model, $attr = null)
+    {
+        $text = '';
+        if(!empty($attr)){
+            $text = '<div class="form-group">';
+            $text .= '<div class="col-sm-4" name="title-'.$attr.'"><h3 style="margin: 0px; text-decoration: underline;">'.$model->getAttributeLabel($attr).':</h3></div>';
+            if($attr != 'sex') {
+                $text .= '<div class="col-sm-6" name="'.$attr.'"><h3 style="margin: 0px;">' . $model->getAttribute($attr) . '</h3></div>';
+            }else{
+                $text .= '<div class="col-sm-6" name="'.$attr.'"><h3 style="margin: 0px;">' . $model->getSex() . '</h3></div>';
+            }
+            $text .= '</div>';
+        }
+        return $text;
+    }
+
     public static function myRole()
     {
         $value = 'Guest';
