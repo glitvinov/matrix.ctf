@@ -74,9 +74,9 @@
 
 <canvas id="c" style="position: fixed; top: 0px; left: 0px; z-index: 10;"></canvas>
 
-<div class="container" style="position: relative; z-index: 11; background: rgba(255, 255, 255, 0.7); margin-top: 20px">
+<div class="container" style="position: relative; z-index: 11; background: rgba(0, 0, 0, 0.9); margin-top: 20px; color: #969696;">
     <div class="navbar-brand" style="float: left; margin-left: 20px">
-        <h1><a href="/matrix.ctf/index.php" class="brand" style="text-decoration: none; color: black">Matrix</a></h1>
+        <h1><a href="/matrix.ctf/index.php" class="brand" style="text-decoration: none; color: #969696">Matrix</a></h1>
     </div>
     <?php
     $inside = Users::checkAuth();
@@ -97,7 +97,7 @@
 
 <div class="container" id="page" style="position: relative; z-index: 11;">
 
-    <div style="background: rgba(255, 255, 255, 0.7);" >
+    <div style="background: rgba(0, 0, 0, 0.8); color: #969696" >
     <?php echo $content; ?>
     </div>
 
