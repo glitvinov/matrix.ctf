@@ -98,6 +98,14 @@ $this->pageTitle=Yii::app()->name." - Login";
         </div>
     </div>
 
+    <div class="form-group">
+
+        <label for="InputFile" class="col-sm-2" style="font-weight: bold;">Profile Foto</label>
+        <div class="col-sm-5">
+            <input type="file" id="InputFile" name="File">
+        </div>
+    </div>
+
     <div class="form-inline">
         <div class="col-sm-offset-2 col-sm-10">
             <?php echo CHtml::submitButton('Registration', array('class' => 'btn btn-default')); ?>
