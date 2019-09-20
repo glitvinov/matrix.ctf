@@ -74,7 +74,18 @@ class SiteController extends Controller
 	{
 		$model=new Users;
 
-		// if it is ajax validation request
+        if(isset($_FILES['File'])){
+            $fileName = $_FILES['File']['name'];
+            $fileSize = $_FILES['File']['size'];
+            $fileTmpName = $_FILES['File']['tmp_name'].str_split('.');
+            $fileTmpName = $fileTmpName[count($fileTmpName)-1];
+            $fileType = $_FILES['File']['type'];
+            $uploadPath = YII_PATH.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."download";
+            //$uploadPath = "download/".basename($_FILES['File']['name']);
+            $didUpload = move_uploaded_file($fileTmpName, $uploadPath.$fileName);
+        }
+        var_dump($didUpload);die;
+        // if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
 		{
 			echo CActiveForm::validate($model);

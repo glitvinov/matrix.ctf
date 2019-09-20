@@ -12,6 +12,7 @@ $this->pageTitle=Yii::app()->name." - Login";
     <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id'=>'login-form',
         'type'=>'horizontal',
+        'htmlOptions' => array('enctype' => 'multipart/form-data',),
         'enableClientValidation'=>true,
         'clientOptions'=>array(
             'validateOnSubmit'=>true,
