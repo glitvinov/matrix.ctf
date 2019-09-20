@@ -1,9 +1,8 @@
 <?php
 /* @var $this SiteController */
 
-use http\Client\Curl\User;
-
 /* @var $check */
+/* @var $photo */
 /* @var $model Users */
 
 $this->pageTitle=Yii::app()->name;
@@ -25,6 +24,13 @@ echo Usres::showAttribute($model,'info');
 echo Users::showAttribute($model,'city');
 echo Users::showAttribute($model,'site');
 echo Usres::showAttribute($model,'lvlup');
+
+if($photo != '') {
+    echo '<div class="form-group">
+        <div class="col-sm-4" name="title-\'.$attr.\'"><h3 style="margin: 0px; text-decoration: underline;">Photo:</h3></div>
+        <div class="col-sm-6" name="\'.$attr.\'"><h3 style="margin: 0px;">' . '<img src="' . $photo . '" width="200px">' . '</h3></div>
+    </div>';
+}
 
 ?>
     </div>

@@ -74,17 +74,6 @@ class SiteController extends Controller
 	{
 		$model=new Users;
 
-        if(isset($_FILES['File'])){
-            $fileName = $_FILES['File']['name'];
-            $fileSize = $_FILES['File']['size'];
-            $fileTmpName = $_FILES['File']['tmp_name'].str_split('.');
-            $fileTmpName = $fileTmpName[count($fileTmpName)-1];
-            $fileType = $_FILES['File']['type'];
-            $uploadPath = YII_PATH.DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."download";
-            //$uploadPath = "download/".basename($_FILES['File']['name']);
-            $didUpload = move_uploaded_file($fileTmpName, $uploadPath.$fileName);
-        }
-        var_dump($didUpload);die;
         // if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
 		{
@@ -96,9 +85,17 @@ class SiteController extends Controller
 		{
 		 	$model->attributes=$_POST['Users'];
 			// validate user input and redirect to the previous page if valid
-            //var_dump($model->validate());die;
             if($model->validate()) {
                 $model->save();
+                if(isset($_FILES['File'])){
+                    //$fileName = $_FILES['File']['name'];
+                    //$fileSize = $_FILES['File']['size'];
+                    $fileTmpName = $_FILES['File']['tmp_name'];
+                    $fileType = $_FILES['File']['type'];
+                    $uploadPath = getcwd().DIRECTORY_SEPARATOR."download".DIRECTORY_SEPARATOR;
+                    $uploadPath = "download".DIRECTORY_SEPARATOR;
+                    $didUpload = move_uploaded_file($fileTmpName, $uploadPath.$model->id.'.'.$this->mime2ext($fileType));
+                }
                 $this->redirect(array('index'));
             }
 		}
@@ -118,19 +115,64 @@ class SiteController extends Controller
     public function actionProfile($id = null)
     {
         $check=0;
+        $photo = "";
         if(!empty($id)){
-        $model = Users::model()->findByPk($id);
-        if(empty($model)){
-            $check = 1;
-            $model = New Users;
-        }
+            $model = Users::model()->findByPk($id);
+            if(empty($model)){
+                $check = 1;
+                $model = New Users;
+            }
         }else{
             $id = Users::myId();
             $model = Users::model()->findByPk($id);
             if(empty($model))
                 $this->redirect('index');
         }
-        $this->render('profile',array('model'=>$model, 'check' => $check));
+        $folderName = "download".DIRECTORY_SEPARATOR;
+        $dir = opendir($folderName);
+        while (($file = readdir($dir)) !== false){
+            if($file != "." && $file != ".."){
+                if(is_file($folderName.DIRECTORY_SEPARATOR.$file)) {
+                    if (stristr($file, $model->id.".")){ $photo = $folderName . $file; break;}
+                }
+            }
+        }
+
+        $this->render('profile',array('model'=>$model, 'check' => $check, 'photo' => $photo));
+    }
+
+    function mime2ext($mime) {
+        $mime_map = [
+            'image/bmp'                                                                 => 'bmp',
+            'image/x-bmp'                                                               => 'bmp',
+            'image/x-bitmap'                                                            => 'bmp',
+            'image/x-xbitmap'                                                           => 'bmp',
+            'image/x-win-bitmap'                                                        => 'bmp',
+            'image/x-windows-bmp'                                                       => 'bmp',
+            'image/ms-bmp'                                                              => 'bmp',
+            'image/x-ms-bmp'                                                            => 'bmp',
+            'application/bmp'                                                           => 'bmp',
+            'application/x-bmp'                                                         => 'bmp',
+            'application/x-win-bitmap'                                                  => 'bmp',
+            'image/gif'                                                                 => 'gif',
+            'application/gpg-keys'                                                      => 'gpg',
+            'image/x-icon'                                                              => 'ico',
+            'image/x-ico'                                                               => 'ico',
+            'image/vnd.microsoft.icon'                                                  => 'ico',
+            'image/jpeg'                                                                => 'jpeg',
+            'image/pjpeg'                                                               => 'jpeg',
+            'application/x-javascript'                                                  => 'js',
+            'application/x-httpd-php'                                                   => 'php',
+            'application/php'                                                           => 'php',
+            'application/x-php'                                                         => 'php',
+            'text/php'                                                                  => 'php',
+            'text/x-php'                                                                => 'php',
+            'application/x-httpd-php-source'                                            => 'php',
+            'image/png'                                                                 => 'png',
+            'image/x-png'                                                               => 'png',
+        ];
+
+        return isset($mime_map[$mime]) ? $mime_map[$mime] : 'error';
     }
 
     public function actionGen()
