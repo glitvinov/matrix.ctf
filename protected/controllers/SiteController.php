@@ -155,7 +155,6 @@ class SiteController extends Controller
             'application/x-bmp'                                                         => 'bmp',
             'application/x-win-bitmap'                                                  => 'bmp',
             'image/gif'                                                                 => 'gif',
-            'application/gpg-keys'                                                      => 'gpg',
             'image/x-icon'                                                              => 'ico',
             'image/x-ico'                                                               => 'ico',
             'image/vnd.microsoft.icon'                                                  => 'ico',
