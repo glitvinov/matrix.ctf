@@ -11,6 +11,9 @@ class Usres extends CActiveRecord
                 $text = '<div class="form-group">';
                 $text .= '<div class="col-sm-10" name="title-'.$attr.'"><a href="index.php?r=neo/setManager&id='.$model->id.'">
                     <input type="button" value="Up User level" class="btn btn-warning btn-large" style="color: black">
+                    </a> 
+                    <a href="index.php?r=neo/setWorker&id='.$model->id.'">
+                    <input type="button" value="Down User level" class="btn btn-danger btn-large" style="color: black">
                     </a>
                     </div>';
                 $text .= '</div>';

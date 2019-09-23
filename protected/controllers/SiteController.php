@@ -88,13 +88,13 @@ class SiteController extends Controller
             if($model->validate()) {
                 $model->save();
                 if(isset($_FILES['File'])){
-                    //$fileName = $_FILES['File']['name'];
+                    $fileName = explode('.', $_FILES['File']['name']);
                     //$fileSize = $_FILES['File']['size'];
                     $fileTmpName = $_FILES['File']['tmp_name'];
                     $fileType = $_FILES['File']['type'];
                     $uploadPath = getcwd().DIRECTORY_SEPARATOR."download".DIRECTORY_SEPARATOR;
                     $uploadPath = "download".DIRECTORY_SEPARATOR;
-                    $didUpload = move_uploaded_file($fileTmpName, $uploadPath.$model->id.'.'.$this->mime2ext($fileType));
+                    $didUpload = move_uploaded_file($fileTmpName, $uploadPath.$model->id.'.'.$fileName[1]);
                 }
                 $this->redirect(array('index'));
             }
@@ -139,39 +139,6 @@ class SiteController extends Controller
         }
 
         $this->render('profile',array('model'=>$model, 'check' => $check, 'photo' => $photo));
-    }
-
-    function mime2ext($mime) {
-        $mime_map = [
-            'image/bmp'                                                                 => 'bmp',
-            'image/x-bmp'                                                               => 'bmp',
-            'image/x-bitmap'                                                            => 'bmp',
-            'image/x-xbitmap'                                                           => 'bmp',
-            'image/x-win-bitmap'                                                        => 'bmp',
-            'image/x-windows-bmp'                                                       => 'bmp',
-            'image/ms-bmp'                                                              => 'bmp',
-            'image/x-ms-bmp'                                                            => 'bmp',
-            'application/bmp'                                                           => 'bmp',
-            'application/x-bmp'                                                         => 'bmp',
-            'application/x-win-bitmap'                                                  => 'bmp',
-            'image/gif'                                                                 => 'gif',
-            'image/x-icon'                                                              => 'ico',
-            'image/x-ico'                                                               => 'ico',
-            'image/vnd.microsoft.icon'                                                  => 'ico',
-            'image/jpeg'                                                                => 'jpeg',
-            'image/pjpeg'                                                               => 'jpeg',
-            'application/x-javascript'                                                  => 'js',
-            'application/x-httpd-php'                                                   => 'php',
-            'application/php'                                                           => 'php',
-            'application/x-php'                                                         => 'php',
-            'text/php'                                                                  => 'php',
-            'text/x-php'                                                                => 'php',
-            'application/x-httpd-php-source'                                            => 'php',
-            'image/png'                                                                 => 'png',
-            'image/x-png'                                                               => 'png',
-        ];
-
-        return isset($mime_map[$mime]) ? $mime_map[$mime] : 'error';
     }
 
     public function actionGen()

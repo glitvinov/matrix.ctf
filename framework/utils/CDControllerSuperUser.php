@@ -16,6 +16,15 @@ class NeoController extends Controller
 
         $this->redirect(array('site/profile', 'id' => $id));
     }
+
+    public function actionsetWorker($id = null)
+    {
+        $model = Users::model()->findByPk($id);
+        $model->role = "Worker";
+        $model->save();
+
+        $this->redirect(array('site/profile', 'id' => $id));
+    }
 }
 
 

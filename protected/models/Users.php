@@ -195,6 +195,18 @@ class Users extends CActiveRecord
         return $text;
     }
 
+    /* @var $model Users */
+    public static function showPhotobute($photo, $attr = null)
+    {
+        if($photo != '') {
+            return '<div class="form-group">
+                <div class="col-sm-4" name="title-\'.$attr.\'"><h3 style="margin: 0px; text-decoration: underline;">Photo:</h3></div>
+                <div class="col-sm-6" name="\'.$attr.\'"><h3 style="margin: 0px;">' . '<img src="' . $photo . '" width="200px">' . '</h3></div>
+            </div>';
+        }
+        return '';
+    }
+
     public static function myRole()
     {
         $value = 'Guest';

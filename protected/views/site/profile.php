@@ -23,14 +23,8 @@ echo Users::showAttribute($model,'role');
 echo Usres::showAttribute($model,'info');
 echo Users::showAttribute($model,'city');
 echo Users::showAttribute($model,'site');
+echo Users::showPhotobute($photo,'foto');
 echo Usres::showAttribute($model,'lvlup');
-
-if($photo != '') {
-    echo '<div class="form-group">
-        <div class="col-sm-4" name="title-\'.$attr.\'"><h3 style="margin: 0px; text-decoration: underline;">Photo:</h3></div>
-        <div class="col-sm-6" name="\'.$attr.\'"><h3 style="margin: 0px;">' . '<img src="' . $photo . '" width="200px">' . '</h3></div>
-    </div>';
-}
 
 ?>
     </div>
