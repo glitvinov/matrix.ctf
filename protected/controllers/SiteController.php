@@ -142,6 +142,17 @@ class SiteController extends Controller
         $this->render('profile',array('model'=>$model, 'check' => $check, 'photo' => $photo));
     }
 
+    public function actionError() {
+        //var_dump('123');die;
+        if ($error = Yii::app()->errorHandler->error) {
+            if (Yii::app()->request->isAjaxRequest) {
+                echo $error['message'];
+            } else {
+                $this->render('error', $error);
+            }
+        }
+    }
+
     public function actionGen()
     {
         for($i=0 ;$i <= 100; $i++){
