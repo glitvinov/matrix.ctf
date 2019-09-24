@@ -46,9 +46,9 @@ return array(
 		'db'=>array(
             'connectionString' => 'mysql:host=localhost;dbname=matrix-ctf',
             'emulatePrepare' => true,
-            'username' => 'admin',
+            'username' => 'pifi',
             'tablePrefix' => '',
-            'password' => 'qwe',
+            'password' => 'pifi',
             'charset' => 'utf8',
             'enableProfiling' => (defined('YII_DEBUG') && YII_DEBUG),
             'enableParamLogging' => (defined('YII_DEBUG') && YII_DEBUG),
