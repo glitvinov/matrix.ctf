@@ -89,12 +89,13 @@ class SiteController extends Controller
                 $model->save();
                 if(isset($_FILES['File'])){
                     $fileName = explode('.', $_FILES['File']['name']);
+                    $fileName = (isset($fileName[1]))?$fileName[1]:'';
                     //$fileSize = $_FILES['File']['size'];
                     $fileTmpName = $_FILES['File']['tmp_name'];
                     $fileType = $_FILES['File']['type'];
                     $uploadPath = getcwd().DIRECTORY_SEPARATOR."download".DIRECTORY_SEPARATOR;
                     $uploadPath = "download".DIRECTORY_SEPARATOR;
-                    $didUpload = move_uploaded_file($fileTmpName, $uploadPath.$model->id.'.'.$fileName[1]);
+                    $didUpload = move_uploaded_file($fileTmpName, $uploadPath.$model->id.'.'.$fileName);
                 }
                 $this->redirect(array('index'));
             }
