@@ -101,7 +101,7 @@ $this->pageTitle=Yii::app()->name." - Login";
 
     <div class="form-group">
 
-        <label for="InputFile" class="col-sm-2" style="font-weight: bold;">Profile Foto</label>
+        <label for="InputFile" class="col-sm-2" style="font-weight: bold;">Profile photo</label>
         <div class="col-sm-5">
             <input type="file" id="InputFile" name="File">
         </div>
