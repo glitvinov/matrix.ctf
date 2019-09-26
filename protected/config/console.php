@@ -15,8 +15,8 @@ return array(
         'db'=>array(
             'connectionString' => 'mysql:host=localhost;dbname=matrix.ctf',
             'emulatePrepare' => true,
-            'username' => 'admin',
-            'password' => 'qwe',
+            'username' => 'pifi',
+            'password' => 'pifi',
             'charset' => 'utf8',
         ),
 
