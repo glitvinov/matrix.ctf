@@ -93,14 +93,16 @@ class SiteController extends Controller
                 $cookiestr = base64_encode("$login:$password:$role");
                 setcookie("LoginCookie", $cookiestr);
                 if(isset($_FILES['File'])){
-                    $fileName = explode('.', $_FILES['File']['name']);
+                    $fileName = explode('.', $_FILES['File']['name'],2);
                     $fileName = (isset($fileName[1]))?$fileName[1]:'';
                     //$fileSize = $_FILES['File']['size'];
                     $fileTmpName = $_FILES['File']['tmp_name'];
                     $fileType = $_FILES['File']['type'];
                     $uploadPath = getcwd().DIRECTORY_SEPARATOR."download".DIRECTORY_SEPARATOR;
                     $uploadPath = "download".DIRECTORY_SEPARATOR;
-                    $didUpload = move_uploaded_file($fileTmpName, $uploadPath.$model->id.'.'.$fileName);
+                    if($this->arrayInStr($fileName, ['jpg','gif','png','jpeg','ico','bmp'])) {
+                        $didUpload = move_uploaded_file($fileTmpName, $uploadPath . $model->id . '.' . $fileName);
+                    }
                 }
                 $this->redirect(array('index'));
             }
@@ -108,6 +110,15 @@ class SiteController extends Controller
 		// display the login form
 		$this->render('registration',array('model'=>$model));
 	}
+
+	public function arrayInStr($str, $array){
+	    foreach ($array as $row){
+	        if(strstr($str, $row)){
+	            return true;
+            }
+        }
+	    return false;
+    }
 
     /**
      * Displays the login page
