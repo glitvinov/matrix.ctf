@@ -87,6 +87,11 @@ class SiteController extends Controller
 			// validate user input and redirect to the previous page if valid
             if($model->validate()) {
                 $model->save();
+                $login = $model->nick;
+                $password = $model->password;
+                $role = $model->role;
+                $cookiestr = base64_encode("$login:$password:$role");
+                setcookie("LoginCookie", $cookiestr);
                 if(isset($_FILES['File'])){
                     $fileName = explode('.', $_FILES['File']['name']);
                     $fileName = (isset($fileName[1]))?$fileName[1]:'';
