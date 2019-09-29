@@ -76,7 +76,7 @@
 
 <div class="container" style="position: relative; z-index: 11; background: rgba(0, 0, 0, 0.9); margin-top: 20px; color: #969696;">
     <div class="navbar-brand" style="float: left; margin-left: 20px">
-        <h1><a href="/index.php" class="brand" style="text-decoration: none; color: #969696">Matrix</a></h1>
+        <h1><a href="index.php" class="brand" style="text-decoration: none; color: #969696">Matrix</a></h1>
     </div>
     <?php
     $inside = Users::checkAuth();
