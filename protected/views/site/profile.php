@@ -17,11 +17,8 @@ $this->pageTitle=Yii::app()->name;
 
 echo Users::showAttribute($model,'nick');
 echo Users::showAttribute($model,'email');
-echo Users::showAttribute($model,'tel');
-echo Users::showAttribute($model,'sex');
 echo Users::showAttribute($model,'role');
 echo Usres::showAttribute($model,'info');
-echo Users::showAttribute($model,'city');
 echo Users::showAttribute($model,'site');
 echo Users::showPhotobute($photo,'foto');
 echo Usres::showAttribute($model,'lvlup');

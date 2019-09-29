@@ -50,42 +50,12 @@ $this->pageTitle=Yii::app()->name." - Login";
     </div>
 
     <div class="form-group">
-        <?php echo $form->labelEx($model,'tel',array('class' => 'col-sm-2', 'style'=>'font-weight: bold;')); ?>
-        <div class="col-sm-5">
-            <?php echo $form->textField($model,'tel',array('style'=>'width: 100%;')); ?>
-        </div>
-        <div class="col-sm-3">
-            <?php echo $form->error($model,'tel',array('style'=>'font-weight: bold;')); ?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model,'sex',array('class' => 'col-sm-2', 'style'=>'font-weight: bold;')); ?>
-        <div class="col-sm-5 form-inline">
-            <?php echo $form->dropDownList($model,'sex',array('M' => 'Male', 'F' => 'Female' ),array('style'=>'width: 100%; height:auto')); ?>
-        </div>
-        <div class="col-sm-3">
-            <?php echo $form->error($model,'sex',array('style'=>'font-weight: bold;')); ?>
-        </div>
-    </div>
-
-    <div class="form-group">
         <?php echo $form->labelEx($model,'info',array('class' => 'col-sm-2', 'style'=>'font-weight: bold;')); ?>
         <div class="col-sm-5">
             <?php echo $form->textArea($model,'info',array('style'=>'width: 100%;')); ?>
         </div>
         <div class="col-sm-3">
             <?php echo $form->error($model,'info',array('style'=>'font-weight: bold;')); ?>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <?php echo $form->labelEx($model,'city',array('class' => 'col-sm-2', 'style'=>'font-weight: bold;')); ?>
-        <div class="col-sm-5">
-            <?php echo $form->textField($model,'city',array('style'=>'width: 100%;')); ?>
-        </div>
-        <div class="col-sm-3">
-            <?php echo $form->error($model,'city',array('style'=>'font-weight: bold;')); ?>
         </div>
     </div>
 

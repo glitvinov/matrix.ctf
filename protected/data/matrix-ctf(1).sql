@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:3306
--- Время создания: Сен 29 2019 г., 06:16
+-- Время создания: Сен 29 2019 г., 06:15
 -- Версия сервера: 5.7.27-0ubuntu0.18.04.1
 -- Версия PHP: 5.6.40-12+ubuntu18.04.1+deb.sury.org+1
 
@@ -40,6 +40,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `nick`, `tel`, `info`, `sex`, `password`, `role`, `email`, `city`, `site`) VALUES
+(1, 'admin', '88002000017', 'I\'m main people here', 'M', 'admin', 'Worker', 'admin@example.ru', 'Omsk', 'admin.omgtu');
+
+--
 -- Индексы сохранённых таблиц
 --
 
@@ -60,7 +67,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
