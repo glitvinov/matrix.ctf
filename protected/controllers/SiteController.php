@@ -143,7 +143,7 @@ class SiteController extends Controller
             $id = Users::myId();
             $model = Users::model()->findByPk($id);
             if(empty($model))
-                $this->redirect('index');
+                $this->redirect(array('index'));
         }
         $folderName = "download".DIRECTORY_SEPARATOR;
         $dir = opendir($folderName);
