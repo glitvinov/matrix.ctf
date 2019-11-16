@@ -1,0 +1,2 @@
+*/2 * * * * /usr/bin/mysqldump -u pifi -p'pifi' matrix-ctf > /data/backup.sql
+

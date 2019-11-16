@@ -1,0 +1,11 @@
+FROM debian:stable
+
+RUN apt-get update && apt-get install -y vim nano mc php5.6
+
+#RUN docker-php-ext-install pdo pdo_mysql mysqli
+
+# Fix timezone: http://serverfault.com/a/683651
+#ENV TZ=Asia/Omsk
+#RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+#RUN printf '[PHP]\ndate.timezone = "Asia/Omsk"\n' > /usr/local/etc/php/conf.d/tzone.ini
