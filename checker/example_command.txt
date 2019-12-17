@@ -1,0 +1,6 @@
+
+python main.py info localhost:5000
+python main.py check localhost:5000
+python main.py get localhost:5000 1 flag
+python main.py put localhost:5000 1 flag
+

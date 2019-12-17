@@ -1,0 +1,24 @@
+version: '3'
+services:
+    apache:
+        build: ./web
+        ports: 
+          - 5000:80
+        volumes:
+          - ./matrix:/var/www/html
+        depends_on:
+          - db
+    db:
+        build: ./webmysql
+        restart:
+          always
+        volumes:
+          - ./mysql:/var/lib/mysql
+        environment:
+          MYSQL_ROOT_PASSWORD: toor
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        depends_on:
+          - db
+        ports:
+          - 5001:80
