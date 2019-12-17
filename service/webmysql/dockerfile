@@ -1,6 +1,6 @@
 FROM mysql:latest
 
-RUN apt-get update && apt-get install -qq -y vim nano rsyslog supervisor
+#RUN apt-get update && apt-get install -qq -y vim nano rsyslog supervisor
 
 #Insert into mysql config file utf config
 
