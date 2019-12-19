@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python2.7
 import sys
 import requests #pip install requests
 import base64
-import hashlib 
+import hashlib
 import random
 import socket
 from bs4 import BeautifulSoup
@@ -16,6 +16,11 @@ P_REGISTRATION = "http://{}:{}/index.php?r=site/registration"
 P_LOGIN = "http://{}:{}/index.php?r=site/login"
 P_MAIN = "http://{}:{}/index.php?r=site/index"
 P_PROFILE = "http://{}:{}/index.php?r=site/profile"
+
+#P_REGISTRATION = "http://{}:{}/matrix.ctf/index.php?r=site/registration"
+#P_LOGIN = "http://{}:{}/matrix.ctf/index.php?r=site/login"
+#P_MAIN = "http://{}:{}/matrix.ctf/index.php?r=site/index"
+#P_PROFILE = "http://{}:{}/matrix.ctf/index.php?r=site/profile"
 
 
 def info(session):
@@ -57,7 +62,7 @@ def get(session, id_flag, flag, login, password):
             return CORRUPT, 'Flag does not match',  flag, flag_profile
     else:
         return CORRUPT, 'Field not found on page', login, password
-        
+
 
 def put(session, id_flag, flag):
     name = openAllFile('first-names.json')
@@ -129,7 +134,8 @@ if __name__ == "__main__":
     if(len(sys.argv)>4):
         FLAG = sys.argv[4]
 
-print IP, PORT, COMMAND, ID_FLAG, FLAG
+IP = IP.replace('HeadHunter.','')
+#print IP, PORT, COMMAND, ID_FLAG, FLAG
 
 data = ''
 f = open('flag.log', 'a')
@@ -163,9 +169,11 @@ if(COMMAND == 'info'):
     result = info(session)
 log(result)
 
-print result
-
-
+#print(result[1])
+#sys.exit(result[0])
+if(result[0]!=101):
+    print (result[1])
+sys.exit(result[0])
 
 
 
